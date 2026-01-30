@@ -45,6 +45,7 @@ export const AnimatedText = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
   padding: '2rem',
   lineHeight: 1.2,
+  // Material UI breakpoints: md = 900px, sm = 600px
   [theme.breakpoints.down('md')]: {
     fontSize: '2.5rem',
   },
