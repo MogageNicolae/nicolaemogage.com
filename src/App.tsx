@@ -1,12 +1,12 @@
-import './App.css'
+import { Container, AnimatedText } from './AppStyled'
 
 function App() {
   return (
-    <div className="container">
-      <h1 className="animated-text">
+    <Container>
+      <AnimatedText variant="h1">
         Great Things Are Coming
-      </h1>
-    </div>
+      </AnimatedText>
+    </Container>
   )
 }
 
