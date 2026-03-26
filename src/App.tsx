@@ -1,13 +1,35 @@
-import { Container, AnimatedText } from './AppStyled'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import Home from './pages/Home'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 
-function App() {
-  return (
-    <Container>
-      <AnimatedText variant="h1">
-        Great Things Are Coming
-      </AnimatedText>
-    </Container>
-  )
+function ScrollToSection() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const target = (location.state as { scrollTo?: string })?.scrollTo
+    if (target) {
+      setTimeout(() => {
+        document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+      navigate(location.pathname, { replace: true })
+    }
+  }, [location, navigate])
+
+  return null
 }
 
-export default App
+export default function App() {
+  return (
+    <>
+      <ScrollToSection />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
+    </>
+  )
+}
