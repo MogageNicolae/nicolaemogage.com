@@ -1,9 +1,11 @@
+import { useState, useEffect } from 'react'
 import { useTheme } from '../../../../hooks/useTheme'
 import * as S from './styles'
 
 interface NavProps {
   scrollY: number
   activeSection: string
+  onNavigate?: (section: string) => void
 }
 
 const NAV_SECTIONS = ['about', 'experience', 'projects', 'blog', 'contact']
@@ -12,8 +14,22 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
-export default function Nav({ scrollY, activeSection }: NavProps) {
+export default function Nav({ scrollY, activeSection, onNavigate }: NavProps) {
   const { theme, toggle } = useTheme()
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  function handleNav(id: string) {
+    onNavigate?.(id)
+    scrollTo(id)
+    setMobileOpen(false)
+  }
+
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 640) setMobileOpen(false) }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   return (
     <nav
@@ -21,7 +37,7 @@ export default function Nav({ scrollY, activeSection }: NavProps) {
       style={S.navBar(scrollY, theme)}
     >
       <div className="nav-inner" style={S.navInner}>
-        <button onClick={() => scrollTo('hero')} style={S.logo}>
+        <button onClick={() => handleNav('hero')} style={S.logo}>
           N<span style={S.logoAccent}>M</span>
         </button>
 
@@ -30,7 +46,7 @@ export default function Nav({ scrollY, activeSection }: NavProps) {
           {NAV_SECTIONS.map((s) => (
             <button
               key={s}
-              onClick={() => scrollTo(s)}
+              onClick={() => handleNav(s)}
               className={`nav-link ${activeSection === s ? 'active' : ''}`}
             >
               {s}
@@ -41,21 +57,31 @@ export default function Nav({ scrollY, activeSection }: NavProps) {
           </button>
         </div>
 
-        {/* Mobile toggle */}
+        {/* Mobile controls */}
         <div className="sm:hidden flex items-center gap-3">
           <button className="theme-toggle" onClick={toggle} aria-label="Toggle theme" style={S.mobileToggle}>
             {theme === 'dark' ? '☀' : '☾'}
           </button>
+          <button
+            className="mobile-hamburger"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+          >
+            <span className={`hamburger-line ${mobileOpen ? 'open' : ''}`} />
+            <span className={`hamburger-line ${mobileOpen ? 'open' : ''}`} />
+            <span className={`hamburger-line ${mobileOpen ? 'open' : ''}`} />
+          </button>
         </div>
       </div>
 
-      {/* Mobile nav */}
-      <div className="sm:hidden flex justify-center gap-5 pb-2 px-4 overflow-x-auto">
+      {/* Mobile dropdown menu */}
+      <div className={`mobile-menu sm:hidden ${mobileOpen ? 'mobile-menu--open' : ''}`}>
         {NAV_SECTIONS.map((s) => (
           <button
             key={s}
-            onClick={() => scrollTo(s)}
-            className={`nav-link ${activeSection === s ? 'active' : ''}`}
+            onClick={() => handleNav(s)}
+            className={`mobile-menu-link ${activeSection === s ? 'active' : ''}`}
           >
             {s}
           </button>

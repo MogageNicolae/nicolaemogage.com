@@ -484,7 +484,7 @@ const rawBlogPosts: RawBlogPost[] = [
   {
     title: "GraphRAG vs Vector RAG: What I Learned at NODES 2025",
     slug: "graphrag-vs-vector-rag-nodes-2025",
-    date: "2026-03-20",
+    date: "2025-12-20",
     excerpt:
       "Knowledge Graphs + LLMs are the most promising frontier in AI. Here's what stood out from the NODES 2025 conference on GraphRAG and agentic workflows.",
     tags: ["RAG", "Knowledge Graphs", "Conference"],
@@ -545,7 +545,7 @@ The conference made it clear that the future is hybrid systems orchestrated by a
   {
     title: "Deep Learning for Software Defect Prediction: A Survey",
     slug: "deep-learning-software-defect-prediction",
-    date: "2026-03-15",
+    date: "2025-11-26",
     excerpt:
       "From CNNs to Transformers - how neural architectures are replacing handcrafted metrics for predicting where code will break.",
     tags: ["Deep Learning", "Research", "Software Quality"],
@@ -614,7 +614,7 @@ The frontier is converging on two directions: **agentic AI for autonomous defect
   {
     title: "Shift Quantization: Compressing Neural Networks for Edge Deployment",
     slug: "shift-quantization-neural-networks",
-    date: "2026-03-10",
+    date: "2025-05-25",
     excerpt:
       "Comparing ADMM, INQ, and DenseShift quantization techniques for deploying neural networks on resource-constrained devices.",
     tags: ["Deep Learning", "Optimization", "Research"],
@@ -665,7 +665,7 @@ Our paper focused on MNIST with ResNet-18, which is a controlled benchmark. The 
   {
     title: "Multi-Agent Systems for F1 Racing Strategy",
     slug: "multi-agent-systems-f1-racing",
-    date: "2026-02-15",
+    date: "2025-05-05",
     excerpt:
       "How game theory, reinforcement learning, and agent-based modeling can revolutionize strategic decision-making in Formula 1.",
     tags: ["Multi-Agent Systems", "Reinforcement Learning", "Research"],
@@ -728,7 +728,7 @@ This research reinforced my conviction that multi-agent systems are most powerfu
   {
     title: "Multilingual Machine Translation: LLMs vs Traditional MNMT",
     slug: "multilingual-machine-translation",
-    date: "2026-01-20",
+    date: "2025-04-05",
     excerpt:
       "Can LLMs replace traditional multilingual NMT systems? A look at the current state of translation for low-resource languages like Romanian.",
     tags: ["NLP", "Translation", "Research"],
@@ -797,7 +797,7 @@ For anyone building production translation involving Romanian or other mid-resou
   {
     title: "Handwriting Recognition: From WideResNet to Production",
     slug: "handwriting-recognition-widresnet",
-    date: "2025-06-15",
+    date: "2024-06-15",
     excerpt:
       "Building an end-to-end offline handwriting recognition system using WideResNet and LSTM - my bachelor's thesis project.",
     tags: ["Computer Vision", "Deep Learning", "PyTorch"],

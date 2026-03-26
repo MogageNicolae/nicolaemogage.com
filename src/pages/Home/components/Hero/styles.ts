@@ -58,6 +58,7 @@ export const bio: CSSProperties = {
 export const socialsRow: CSSProperties = {
   marginTop: 32,
   paddingTop: 24,
+  paddingBottom: 48,
   borderTop: '1px solid var(--border)',
 }
 
