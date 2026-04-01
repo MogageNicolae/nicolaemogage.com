@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import FadeIn from '../../components/FadeIn'
 import { useTheme } from '../../hooks/useTheme'
@@ -8,6 +9,25 @@ export default function BlogPost() {
   useTheme()
   const { slug } = useParams()
   const post = blogPosts.find((p) => p.slug === slug)
+
+  useEffect(() => {
+    if (!post) return
+    const title = `${post.title} | Nicolae Mogage`
+    document.title = title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', post.excerpt)
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', title)
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', post.excerpt)
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', `https://nicolaemogage.com/blog/${post.slug}`)
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://nicolaemogage.com/blog/${post.slug}`)
+    return () => {
+      document.title = 'Nicolae Mogage | AI/ML Engineer & Full Stack Developer'
+      document.querySelector('meta[name="description"]')?.setAttribute('content', 'Nicolae Mogage - AI/ML Engineer at RebelDot, Cluj-Napoca. Building multi-agent LangGraph systems, RAG pipelines, fine-tuned models, and full-stack AI products with Python, .NET, and React.')
+      document.querySelector('meta[property="og:title"]')?.setAttribute('content', 'Nicolae Mogage | AI/ML Engineer & Full Stack Developer')
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', 'Engineering AI systems from research to production. Multi-agent architectures, RAG pipelines, and full-stack AI products.')
+      document.querySelector('meta[property="og:url"]')?.setAttribute('content', 'https://nicolaemogage.com')
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://nicolaemogage.com')
+    }
+  }, [post])
 
   if (!post) return <Navigate to="/blog" replace />
 

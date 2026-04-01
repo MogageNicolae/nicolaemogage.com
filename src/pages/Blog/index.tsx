@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import FadeIn from '../../components/FadeIn'
 import { useTheme } from '../../hooks/useTheme'
@@ -7,6 +7,17 @@ import * as S from './styles'
 
 export default function Blog() {
   useTheme()
+
+  useEffect(() => {
+    document.title = 'Blog | Nicolae Mogage - AI/ML Engineer'
+    document.querySelector('meta[name="description"]')?.setAttribute('content', 'Technical blog by Nicolae Mogage covering AI engineering, multi-agent systems, RAG pipelines, deep learning, and full-stack development.')
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://nicolaemogage.com/blog')
+    return () => {
+      document.title = 'Nicolae Mogage | AI/ML Engineer & Full Stack Developer'
+      document.querySelector('meta[name="description"]')?.setAttribute('content', 'Nicolae Mogage - AI/ML Engineer at RebelDot, Cluj-Napoca. Building multi-agent LangGraph systems, RAG pipelines, fine-tuned models, and full-stack AI products with Python, .NET, and React.')
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://nicolaemogage.com')
+    }
+  }, [])
   const allTags = [...new Set(blogPosts.flatMap((p) => p.tags))]
   const [activeTag, setActiveTag] = useState<string | null>(null)
 
